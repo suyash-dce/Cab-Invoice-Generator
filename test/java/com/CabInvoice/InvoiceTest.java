@@ -12,6 +12,7 @@ public class InvoiceTest {
 	public void setUp() throws Exception {
 		invoiceGenerator = new InvoiceGenerator();
 	}
+
 	@Test
 	public void givenDistanceAndTimeShouldReturnTotalFare() {
 		double distance = 2.5;
@@ -30,15 +31,11 @@ public class InvoiceTest {
 
 	@Test
 	public void givenMultipleRidesShouldReturnInvoiceSummary() {
+		int userId = 123;
 		Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
-		Summary invoiceSummary = invoiceGenerator.calculateFare(rides);
+		InvoiceGenerator cabInvoiceGenerator = new InvoiceGenerator(userId, rides);
+		Summary actualInvoiceSummary = cabInvoiceGenerator.calculateFare(userId);
 		Summary expectedInvoiceSummary = new Summary(2, 30.0);
-		Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
-	}
-
-	public void givenMultipleRidesShouldReturnAggregateTotalForAll() {
-		Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
-		double totalFare = invoiceGenerator.calculateFare(rides);
-		Assert.assertEquals(30, totalFare, 0.0);
+		Assert.assertEquals(expectedInvoiceSummary, actualInvoiceSummary);
 	}
 }
