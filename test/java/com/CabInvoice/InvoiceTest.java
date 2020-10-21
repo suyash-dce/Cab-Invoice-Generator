@@ -29,6 +29,13 @@ public class InvoiceTest {
 	}
 
 	@Test
+	public void givenMultipleRidesShouldReturnInvoiceSummary() {
+		Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
+		Summary invoiceSummary = invoiceGenerator.calculateFare(rides);
+		Summary expectedInvoiceSummary = new Summary(2, 30.0);
+		Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
+	}
+
 	public void givenMultipleRidesShouldReturnAggregateTotalForAll() {
 		Rides[] rides = { new Rides(2.0, 5), new Rides(0.1, 1) };
 		double totalFare = invoiceGenerator.calculateFare(rides);
