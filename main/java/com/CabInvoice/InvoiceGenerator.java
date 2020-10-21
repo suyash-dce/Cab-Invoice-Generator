@@ -7,7 +7,6 @@ public class InvoiceGenerator {
 	private static final double MINIMUM_COST_PER_KM = 10.0;
 	private static final int COST_PER_TIME = 1;
 	private static final double MINIMUM_FARE = 5.0;
-
 	public static void main(String[] args) {
 		Logger log = Logger.getLogger(InvoiceGenerator.class.getName());
 		log.info("Welcome to the Cab Invoice Generator System.");
@@ -23,7 +22,6 @@ public class InvoiceGenerator {
 		for (Rides ride : rides) {
 			totalFare += this.calculateFare(ride.distance, ride.time);
 		}
-		return new Summary(rides.length, totalFare);
+		return totalFare;
 	}
-
 }
